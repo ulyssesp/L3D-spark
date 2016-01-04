@@ -31,11 +31,11 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- * 
+ *
  * -------------
  * Now based off
  * http://www.whatwg.org/specs/web-socket-protocol/
- * 
+ *
  * - OLD -
  * Currently based off of "The Web Socket protocol" draft (v 75):
  * http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-75
@@ -46,7 +46,7 @@
 #include "Base64.h"
 #include "tropicssl/sha1.h"
 
-static TCPClient* blankClient = new TCPClient(MAX_SOCK_NUM);
+static TCPClient* blankClient = new TCPClient();
 
 SparkWebSocketServer::SparkWebSocketServer(TCPServer &tcpServer)
 {

@@ -44,7 +44,7 @@ http://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-75
 #define _SPARK_WEB_SOCKET_H_
 
 #include "application.h"
-#include "spark_utilities.h"
+#include "system_cloud.h"
 
 #define CRLF "\r\n"
 

@@ -33,13 +33,13 @@ Cube::Cube() : \
 
 /** Initialization of cube resources and environment. */
 void Cube::begin(void) {
-  // initialize Spark variables
+  // initialize Particle variables
   int (Cube::*setPort)(String) = &Cube::setPort;
 
-  Spark.variable("IPAddress", this->localIP, STRING);
-  Spark.variable("MACAddress", this->macAddress, STRING);
-  Spark.variable("port", &this->port, INT);
-  Spark.function("setPort", (int (*)(String)) setPort);
+  Particle.variable("IPAddress", this->localIP, STRING);
+  Particle.variable("MACAddress", this->macAddress, STRING);
+  Particle.variable("port", &this->port, INT);
+  Particle.function("setPort", (int (*)(String)) setPort);
 
   this->initButtons();
   this->udp.begin(STREAMING_PORT);
@@ -425,7 +425,7 @@ void Cube::initButtons() {
   this->onlinePressed = digitalRead(INTERNET_BUTTON);
 
   if(onlinePressed)
-    Spark.connect();
+    Particle.connect();
 
   void (Cube::*check)(void) = &Cube::onlineOfflineSwitch;
   attachInterrupt(INTERNET_BUTTON, (void (*)())check, CHANGE);
@@ -446,11 +446,11 @@ void Cube::onlineOfflineSwitch() {
   if((!this->onlinePressed) && (this->lastOnline)) {
     //marked as 'online'
     this->lastOnline = this->onlinePressed;
-    Spark.connect();
+    Particle.connect();
   } else if((this->onlinePressed) && (!this->lastOnline)) {
     // marked as 'offline'
     this->lastOnline = this->onlinePressed;
-    Spark.disconnect();
+    Particle.disconnect();
   }
 
   this->lastOnline = this->onlinePressed;
@@ -502,7 +502,7 @@ void Cube::updateNetworkInfo() {
   sprintf(this->macAddress, "%02x:%02x:%02x:%02x:%02x:%02x",macAddr[5],macAddr[4],macAddr[3],macAddr[2],macAddr[1],macAddr[0]);
 }
 
-/** Function to be called via Spark API for updating the streaming port number.
+/** Function to be called via Particle API for updating the streaming port number.
     Resets the UDP connection with the new port.
 
     @param _port A decimal number in a String, corresponding to the desired port number.
